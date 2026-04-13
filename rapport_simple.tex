@@ -1,0 +1,468 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[left=3cm,right=2cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{float}
+
+% Configuration de la page
+\onehalfspacing
+
+% Configuration des en-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Configuration des liens hypertexte
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    citecolor=black
+}
+
+\begin{document}
+
+% Page de titre
+\begin{titlepage}
+% Header with logos
+\begin{minipage}[t]{0.3\textwidth}
+\includegraphics[width=\textwidth]{images/image-removebg-preview (19).png}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.3\textwidth}
+\flushright
+\includegraphics[width=\textwidth]{images/image-removebg-preview (27).png}
+\end{minipage}
+
+\vspace{1cm}
+\centering
+\vspace*{2cm}
+
+{\huge\bfseries RAPPORT DE PROJET}
+
+\vspace{1.5cm}
+
+{\Large\bfseries Système de Gestion des Colis}
+
+\vspace{1cm}
+
+{\large Étude Fonctionnelle, Conceptuelle et Réalisation}
+
+\vspace{3cm}
+
+\begin{tabular}{ll}
+\textbf{Réalisé par :} & [Votre Nom] \\[0.5cm]
+\textbf{Encadré par :} & [Nom de l'encadrant] \\[0.5cm]
+\textbf{Entreprise :} & [Nom de l'entreprise] \\[0.5cm]
+\textbf{Année universitaire :} & 2024-2025 \\
+\end{tabular}
+
+\vfill
+
+{\large [Nom de l'université/école]}
+
+{\large [Département/Filière]}
+
+\end{titlepage}
+
+% Table des matières
+\tableofcontents
+\newpage
+
+% Remerciements
+\chapter*{Remerciements}
+\addcontentsline{toc}{chapter}{Remerciements}
+
+Je tiens à exprimer mes sincères remerciements à toutes les personnes qui ont contribué à la réalisation de ce projet.
+
+Tout d'abord, je remercie mon encadrant pour son encadrement, ses conseils précieux et sa disponibilité tout au long de ce projet.
+
+Je remercie également l'équipe de l'entreprise pour leur accueil chaleureux et leur collaboration durant la période de stage.
+
+Mes remerciements vont aussi à tous les enseignants qui m'ont fourni les bases théoriques nécessaires pour mener à bien ce travail.
+
+Enfin, je remercie ma famille et mes amis pour leur soutien constant et leurs encouragements.
+
+\newpage
+
+% Introduction Générale
+\chapter*{Introduction Générale}
+\addcontentsline{toc}{chapter}{Introduction Générale}
+
+Dans le contexte actuel de digitalisation des services postaux, la gestion des colis représente un enjeu majeur pour les services de livraison. La nécessité d'automatiser et d'optimiser les processus de suivi et de gestion des colis devient de plus en plus pressante pour améliorer l'efficacité opérationnelle et la satisfaction client.
+
+Ce rapport présente le développement d'un système de gestion des colis qui vise à moderniser et simplifier les processus traditionnels de suivi postal. Le système développé permet une gestion complète du cycle de vie des colis, depuis l'expédition jusqu'à la livraison finale.
+
+L'objectif principal de ce projet est de concevoir et réaliser une solution informatique robuste et conviviale qui répond aux besoins spécifiques de gestion des colis. Cette solution doit permettre une meilleure traçabilité des expéditions, une réduction des erreurs manuelles et une amélioration de l'expérience utilisateur.
+
+Ce document est structuré en trois parties principales : l'étude fonctionnelle qui analyse les besoins et définit les spécifications, l'étude conceptuelle qui présente la modélisation du système, et enfin la réalisation qui détaille l'implémentation et les fonctionnalités développées.
+
+\newpage
+
+% Présentation de l'entreprise
+\chapter*{Présentation de l'entreprise}
+\addcontentsline{toc}{chapter}{Présentation de l'entreprise}
+
+\section*{Historique et mission}
+
+L'entreprise est une institution financière qui se spécialise dans la gestion des prêts et services financiers. Depuis sa création, l'entreprise s'est positionnée comme un acteur majeur dans le secteur financier en proposant des solutions innovantes et adaptées aux besoins de sa clientèle.
+
+\section*{Activités principales}
+
+L'entreprise propose une gamme complète de services financiers incluant :
+\begin{itemize}
+    \item Gestion des prêts personnels et professionnels
+    \item Services bancaires traditionnels
+    \item Conseil financier et investissement
+    \item Solutions de paiement digitales
+\end{itemize}
+
+\section*{Vision et objectifs stratégiques}
+
+L'entreprise vise à moderniser ses processus internes en adoptant les nouvelles technologies pour améliorer l'efficacité opérationnelle et offrir une meilleure expérience client. Le projet de système de gestion des prêts s'inscrit dans cette démarche de transformation digitale.
+
+\newpage
+
+% Chapitre 1 : Études fonctionnelles
+\chapter{Études fonctionnelles}
+
+\section{Introduction}
+
+L'étude fonctionnelle constitue la première étape cruciale dans le développement de notre système de gestion des prêts. Cette phase permet d'identifier et d'analyser les besoins des utilisateurs, de définir les fonctionnalités requises et d'établir les spécifications du système.
+
+\section{Description du projet}
+
+Le projet consiste à développer un système informatisé de gestion des prêts qui automatise et optimise les processus manuels existants. Le système doit couvrir l'ensemble du cycle de vie d'un prêt, depuis la demande initiale jusqu'au remboursement complet.
+
+Les principales fonctionnalités du système incluent :
+\begin{itemize}
+    \item Gestion des demandes de prêts
+    \item Suivi des emprunteurs et de leurs informations
+    \item Calcul automatique des échéanciers de remboursement
+    \item Gestion des paiements et suivi des retards
+    \item Génération de rapports et statistiques
+    \item Administration des utilisateurs du système
+\end{itemize}
+
+\section{Identification des acteurs}
+
+L'analyse du système a permis d'identifier les acteurs suivants :
+
+\subsection{Acteurs principaux}
+\begin{itemize}
+    \item \textbf{Agent de prêts} : Responsable de la saisie et du suivi des demandes de prêts
+    \item \textbf{Gestionnaire financier} : Supervise les opérations financières et valide les prêts
+    \item \textbf{Administrateur système} : Gère les utilisateurs et la configuration du système
+\end{itemize}
+
+\subsection{Acteurs secondaires}
+\begin{itemize}
+    \item \textbf{Emprunteur} : Client qui demande un prêt (acteur externe)
+    \item \textbf{Système bancaire} : Interface avec les systèmes de paiement externes
+\end{itemize}
+
+\section{Analyse des besoins}
+
+\subsection{Besoins fonctionnels}
+
+\subsubsection{Gestion des prêts}
+\begin{itemize}
+    \item Créer une nouvelle demande de prêt
+    \item Modifier les informations d'un prêt existant
+    \item Consulter la liste des prêts avec filtres de recherche
+    \item Calculer automatiquement les échéanciers de remboursement
+    \item Gérer différents types de prêts (personnel, immobilier, automobile, etc.)
+\end{itemize}
+
+\subsubsection{Gestion des emprunteurs}
+\begin{itemize}
+    \item Enregistrer les informations personnelles des emprunteurs
+    \item Modifier et mettre à jour les données des emprunteurs
+    \item Consulter l'historique des prêts d'un emprunteur
+    \item Évaluer la solvabilité des emprunteurs
+\end{itemize}
+
+\subsubsection{Gestion des paiements}
+\begin{itemize}
+    \item Enregistrer les paiements effectués
+    \item Modifier ou annuler un paiement
+    \item Calculer les intérêts et pénalités de retard
+    \item Générer des rappels de paiement
+\end{itemize}
+
+\subsection{Besoins non fonctionnels}
+
+\subsubsection{Performance}
+\begin{itemize}
+    \item Temps de réponse inférieur à 3 secondes pour les opérations courantes
+    \item Support de minimum 50 utilisateurs simultanés
+    \item Disponibilité du système 99.5\% du temps
+\end{itemize}
+
+\subsubsection{Sécurité}
+\begin{itemize}
+    \item Authentification obligatoire pour accéder au système
+    \item Chiffrement des données sensibles
+    \item Traçabilité de toutes les opérations
+    \item Sauvegarde automatique des données
+\end{itemize}
+
+\section{Conclusion}
+
+Cette étude fonctionnelle nous a permis de définir clairement les objectifs et les spécifications de notre système de gestion des prêts. L'identification des acteurs et l'analyse détaillée des besoins constituent la base solide sur laquelle nous pourrons construire la conception du système.
+
+\newpage
+
+% Chapitre 2 : Études conceptuelle
+\chapter{Études conceptuelle (côté client)}
+
+\section{Introduction}
+
+L'étude conceptuelle représente la phase de modélisation du système où nous traduisons les besoins fonctionnels identifiés précédemment en modèles conceptuels. Cette étape est cruciale car elle permet de structurer et d'organiser les éléments du système avant la phase de réalisation.
+
+\section{Langage de modélisation}
+
+Pour la modélisation de notre système, nous avons choisi d'utiliser UML (Unified Modeling Language) qui est le langage de modélisation standard pour les systèmes orientés objet.
+
+\section{Conception}
+
+\subsection{Diagramme de cas d'utilisation}
+
+Le diagramme de cas d'utilisation présente une vue d'ensemble des fonctionnalités du système et des interactions avec les acteurs identifiés.
+
+\subsubsection{Cas d'utilisation principaux}
+
+\textbf{Pour l'Agent de prêts :}
+\begin{itemize}
+    \item Gérer les demandes de prêts (créer, modifier, consulter)
+    \item Gérer les emprunteurs (ajouter, modifier, consulter)
+    \item Enregistrer les paiements
+    \item Consulter les plans de remboursement
+\end{itemize}
+
+\textbf{Pour le Gestionnaire financier :}
+\begin{itemize}
+    \item Valider les demandes de prêts
+    \item Générer des rapports financiers
+    \item Consulter les statistiques de remboursement
+    \item Gérer les types de prêts
+\end{itemize}
+
+\subsection{Diagramme de classes}
+
+Le diagramme de classes représente la structure statique du système en montrant les classes, leurs attributs, méthodes et les relations entre elles.
+
+\subsubsection{Classes principales}
+
+\textbf{Classe Prêt :}
+\begin{itemize}
+    \item Attributs : id, montant, taux\_interet, duree, date\_debut, statut
+    \item Méthodes : calculerEcheancier(), calculerInteret(), mettreAJourStatut()
+\end{itemize}
+
+\textbf{Classe Emprunteur :}
+\begin{itemize}
+    \item Attributs : id, nom, prenom, adresse, telephone, email, score\_credit
+    \item Méthodes : ajouterPret(), calculerScoreCredit(), obtenirHistorique()
+\end{itemize}
+
+\section{Conclusion}
+
+Cette étude conceptuelle nous a permis de modéliser de manière précise et structurée notre système de gestion des prêts. Les diagrammes UML réalisés constituent une base solide pour la phase de réalisation.
+
+\newpage
+
+% Chapitre 3 : Réalisation du système
+\chapter{Réalisation du système de gestion des prêts (côté client)}
+
+\section{Introduction}
+
+Ce chapitre présente la phase de réalisation du système de gestion des prêts. Après avoir défini les besoins fonctionnels et conçu l'architecture du système, nous procédons maintenant à l'implémentation effective de la solution.
+
+\section{Environnement de travail}
+
+\subsection{Environnement logiciel}
+
+Le développement du système a été réalisé dans un environnement professionnel comprenant les outils suivants :
+
+\begin{itemize}
+    \item \textbf{Système d'exploitation} : Windows 10 / Linux Ubuntu 20.04
+    \item \textbf{IDE} : Visual Studio Code avec extensions pour le développement web
+    \item \textbf{Base de données} : MongoDB pour la persistance des données NoSQL
+    \item \textbf{Serveur web} : Node.js avec Express.js pour l'API REST
+\end{itemize}
+
+\subsection{Langages/Frameworks utilisés}
+
+\subsubsection{Technologies côté client (Frontend)}
+\begin{itemize}
+    \item \textbf{React.js 18.2} : Framework JavaScript pour la création d'interfaces utilisateur dynamiques
+    \item \textbf{React Router 6.8} : Gestion de la navigation et du routage côté client
+    \item \textbf{Chart.js 4.2} : Bibliothèque pour la création de graphiques et visualisations de données
+    \item \textbf{Axios 1.3} : Client HTTP pour les requêtes vers l'API REST
+    \item \textbf{CSS3} : Stylisation moderne avec Flexbox et Grid pour le responsive design
+\end{itemize}
+
+\subsubsection{Technologies côté serveur (Backend)}
+\begin{itemize}
+    \item \textbf{Node.js} : Environnement d'exécution JavaScript côté serveur
+    \item \textbf{Express.js 4.21} : Framework web minimaliste pour Node.js
+    \item \textbf{MongoDB 8.18} : Base de données NoSQL orientée documents
+    \item \textbf{Mongoose} : ODM (Object Document Mapper) pour MongoDB et Node.js
+    \item \textbf{JWT} : JSON Web Tokens pour l'authentification sécurisée
+    \item \textbf{bcryptjs} : Bibliothèque de hachage pour les mots de passe
+\end{itemize}
+
+\section{Description du système complet}
+
+\subsection{Page d'accueil}
+
+La page d'accueil constitue le tableau de bord principal du système. Elle offre une vue d'ensemble des activités et des indicateurs clés de performance.
+
+\textbf{Fonctionnalités principales :}
+\begin{itemize}
+    \item Statistiques en temps réel (nombre de prêts actifs, montants en cours, etc.)
+    \item Graphiques de performance financière
+    \item Notifications et alertes importantes
+    \item Accès rapide aux fonctionnalités les plus utilisées
+\end{itemize}
+
+\subsection{Liste des prêts}
+
+Cette page présente l'ensemble des prêts du système avec des fonctionnalités avancées de recherche et de filtrage.
+
+\textbf{Fonctionnalités disponibles :}
+\begin{itemize}
+    \item Affichage paginé de tous les prêts avec tri par colonnes
+    \item Filtres par statut, type de prêt, période, montant
+    \item Recherche textuelle par nom d'emprunteur ou numéro de prêt
+    \item Actions rapides : consulter, modifier, supprimer
+\end{itemize}
+
+\subsection{Nouvelle demande de prêt}
+
+Cette fonctionnalité permet de créer une nouvelle demande de prêt avec toutes les informations nécessaires.
+
+\textbf{Étapes du processus :}
+\begin{enumerate}
+    \item Sélection de l'emprunteur ou création d'un nouveau profil
+    \item Choix du type de prêt et paramètres associés
+    \item Saisie du montant et de la durée souhaitée
+    \item Calcul automatique de l'échéancier
+    \item Validation et enregistrement de la demande
+\end{enumerate}
+
+\subsection{Gestion des paiements}
+
+La gestion des paiements est centralisée dans une interface dédiée qui permet de suivre tous les remboursements.
+
+\textbf{Fonctionnalités de gestion :}
+\begin{itemize}
+    \item Enregistrement des nouveaux paiements
+    \item Modification des paiements existants
+    \item Filtrage par période, statut, ou emprunteur
+    \item Calcul des totaux par période
+    \item Détection automatique des retards de paiement
+\end{itemize}
+
+\subsection{Gestion des emprunteurs}
+
+La gestion des emprunteurs centralise toutes les informations clients nécessaires au processus de prêt.
+
+\textbf{Fonctionnalités principales :}
+\begin{itemize}
+    \item Création de nouveaux profils d'emprunteurs
+    \item Modification des informations existantes
+    \item Consultation de l'historique des prêts
+    \item Évaluation du score de crédit
+\end{itemize}
+
+\subsection{Administration du système}
+
+\subsubsection{Gestion des utilisateurs}
+Le système permet de gérer les comptes utilisateurs avec différents niveaux d'accès :
+\begin{itemize}
+    \item Création de nouveaux comptes utilisateurs
+    \item Attribution des rôles et permissions
+    \item Modification des informations utilisateur
+    \item Désactivation des comptes si nécessaire
+\end{itemize}
+
+\subsubsection{Configuration des types de prêts}
+L'administrateur peut configurer les différents types de prêts disponibles :
+\begin{itemize}
+    \item Définition des taux d'intérêt par défaut
+    \item Configuration des montants minimum et maximum
+    \item Paramétrage des durées de remboursement autorisées
+\end{itemize}
+
+\subsection{Sécurité et authentification}
+
+Le système implémente plusieurs mesures de sécurité :
+\begin{itemize}
+    \item Page de connexion sécurisée avec authentification
+    \item Gestion des sessions utilisateur
+    \item Contrôle d'accès basé sur les rôles
+    \item Chiffrement des mots de passe
+    \item Journalisation des actions importantes
+\end{itemize}
+
+\newpage
+
+% Conclusion Générale
+\chapter*{Conclusion Générale}
+\addcontentsline{toc}{chapter}{Conclusion Générale}
+
+Ce projet de développement d'un système de gestion des prêts a permis de répondre aux besoins exprimés par l'entreprise en matière de modernisation et d'automatisation des processus de gestion financière.
+
+\section*{Objectifs atteints}
+
+Au terme de ce projet, nous avons réussi à :
+
+\begin{itemize}
+    \item Développer une solution complète de gestion des prêts couvrant l'ensemble du cycle de vie
+    \item Créer une interface utilisateur moderne et intuitive adaptée aux différents profils d'utilisateurs
+    \item Implémenter des fonctionnalités avancées de calcul automatique et de génération de rapports
+    \item Assurer la sécurité des données et des accès grâce à un système d'authentification robuste
+    \item Respecter les contraintes techniques et fonctionnelles définies lors de l'analyse des besoins
+\end{itemize}
+
+\section*{Apports du projet}
+
+Ce projet a apporté plusieurs bénéfices significatifs :
+
+\textbf{Pour l'entreprise :}
+\begin{itemize}
+    \item Réduction des erreurs manuelles et amélioration de la précision des calculs
+    \item Gain de temps considérable dans le traitement des demandes de prêts
+    \item Meilleure traçabilité des opérations et respect des procédures
+    \item Amélioration de la relation client grâce à des délais de traitement réduits
+\end{itemize}
+
+\section*{Perspectives d'évolution}
+
+Plusieurs améliorations peuvent être envisagées pour enrichir le système :
+
+\begin{itemize}
+    \item Intégration d'un module de génération automatique de documents contractuels
+    \item Développement d'une application mobile pour les agents terrain
+    \item Ajout de fonctionnalités de notification par SMS et email
+    \item Implémentation d'un tableau de bord décisionnel avancé
+\end{itemize}
+
+\section*{Conclusion}
+
+Ce projet a démontré l'importance d'une approche méthodologique rigoureuse dans le développement de systèmes d'information. La phase d'analyse fonctionnelle s'est révélée cruciale pour comprendre les besoins réels des utilisateurs, tandis que la modélisation UML a facilité la structuration et l'implémentation du système.
+
+Cette expérience professionnelle a été enrichissante tant sur le plan technique que sur le plan humain, permettant de mettre en pratique les connaissances théoriques acquises et de développer une vision globale des enjeux liés aux systèmes d'information dans le secteur financier.
+
+\end{document}
